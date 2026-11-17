@@ -480,7 +480,7 @@ a.pc-media{text-decoration:none;color:inherit;min-width:0;max-width:100%}
   .campaign-grid{grid-template-columns:1fr}
   .campaign-stage{max-width:280px}
   .campaign-icons{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
-  .campaign-icons li{flex-direction:column;align-items:flex-start;gap:10px}
+  .campaign-icons li{flex-direction:column;align-items:center;text-align:center;gap:10px}
   .campaign-icons li:nth-child(2){border-top:1px solid var(--line)}
 }
 .campaign-video-frame{z-index:1}
@@ -539,14 +539,13 @@ h3,.ritual-step h3,.sku h3,.pc-body h3,.closing-family strong,.ultra-spec dt{fon
 
 /* Alineación: dentro de una misma fila, cada parte de la tarjeta empieza a la misma altura (subgrid) */
 .sku-grid{row-gap:0}
-.sku{display:grid;grid-template-rows:subgrid;grid-row:span 6;row-gap:0;height:auto;margin-bottom:18px}
+.sku{display:grid;grid-template-rows:subgrid;grid-row:span 5;row-gap:0;height:auto;margin-bottom:18px}
 .sku-media{grid-row:1}
-.sku-body{display:grid;grid-template-rows:subgrid;grid-row:2 / span 5;row-gap:0}
-.sku-body > .sku-top{grid-row:1;align-self:start}
-.sku-body > h3{grid-row:2;align-self:start}
-.sku-body > p{grid-row:3;align-self:start}
-.sku-body > .feature-list{grid-row:4;align-self:start;margin-top:4px}
-.sku-body > .sku-link{grid-row:5;align-self:end;margin-top:0}
+.sku-body{display:grid;grid-template-rows:subgrid;grid-row:2 / span 4;row-gap:0}
+.sku-body > h3{grid-row:1;align-self:start}
+.sku-body > p{grid-row:2;align-self:start}
+.sku-body > .feature-list{grid-row:3;align-self:start;margin-top:4px}
+.sku-body > .sku-link{grid-row:4;align-self:end;margin-top:0}
 .closing-families{row-gap:0}
 .closing-family{display:grid;grid-template-rows:subgrid;grid-row:span 3;row-gap:0;margin-bottom:18px}
 .closing-family > span{align-self:start}
@@ -568,10 +567,6 @@ h3,.ritual-step h3,.sku h3,.pc-body h3,.closing-family strong,.ultra-spec dt{fon
 .cookie-prefs{background:none;border:0;padding:0;color:inherit;font:inherit;text-decoration:underline;cursor:pointer;opacity:.8}
 .cookie-prefs[hidden]{display:none}
 
-/* Íconos de activos del sérum: mismo sistema de línea que el resto */
-.ing-icon{transition:background .3s,box-shadow .3s}
-.spotlight-ingredient:hover .ing-icon,.spotlight-ingredient.is-active .ing-icon{box-shadow:0 0 0 3px rgba(244,123,22,.55)}
-@media(max-width:575px){.ing-icon{width:48px;height:48px;flex-basis:48px}.ing-icon svg{width:22px;height:22px}}
 
 /* Hero tablet y celular: texto sobre la foto, al 50 % del ancho.
    La foto ocupa solo el área del texto (no la franja de beneficios). */
@@ -609,20 +604,63 @@ h3,.ritual-step h3,.sku h3,.pc-body h3,.closing-family strong,.ultra-spec dt{fon
   .hero-copy .hero-bottom .hero-cta-group{flex-direction:column;align-items:flex-start}
 }
 
-/* Hero mobile: texto sobre la foto, al 50 %; foto más chica y corrida a la derecha */
+/* Hero mobile: foto arriba a la derecha (cara entera), texto en la zona celeste de la izquierda, botones debajo */
+.hero-short{display:none}
 @media(max-width:767px){
-  .hero-editorial{position:relative;background:linear-gradient(180deg,#d9ebfa 0%,#eef7fd 100%)}
-  .hero-still{position:absolute;top:0;right:0;left:auto;width:100%;height:var(--hero-m,470px);min-height:0;max-height:none;object-fit:cover;object-position:68% 30%;z-index:0}
-  .hero-editorial::before{content:"";position:absolute;inset:0 0 auto 0;height:var(--hero-m,470px);z-index:0;pointer-events:none;
-    background:linear-gradient(90deg,rgba(226,240,252,.95) 0%,rgba(226,240,252,.7) 42%,rgba(226,240,252,0) 62%),linear-gradient(0deg,#e6f2fc 0,rgba(230,242,252,0) 70px)}
-  .hero-stage{min-height:var(--hero-m,470px);justify-content:center;padding-top:24px;padding-bottom:24px}
-  .hero-copy .hero-headline{max-width:52%}
-  .hero-copy .hero-headline h1{font-size:clamp(1.55rem,7.2vw,2.1rem);margin:10px 0 10px}
-  .hero-copy .hero-headline p{font-size:.86rem;line-height:1.45}
-  .hero-copy .hero-bottom{padding-top:18px}
-  .hero-copy .hero-bottom .hero-cta-group{width:100%;flex-direction:row;flex-wrap:nowrap;gap:8px}
-  .hero-copy .hero-bottom .btn{flex:1 1 0;justify-content:center;padding:11px 10px;font-size:.8rem;white-space:nowrap}
+  .hero-long{display:none}
+  .hero-short{display:inline}
+  .hero-editorial{position:relative;background:linear-gradient(180deg,#d4e9fb 0%,#eef7fd 100%)}
+  .hero-still{position:absolute;top:0;right:0;left:auto;width:100%;height:70vw;min-height:0;max-height:none;object-fit:cover;object-position:100% 0;z-index:0}
+  .hero-editorial::before{content:"";position:absolute;inset:0 0 auto 0;height:70vw;z-index:0;pointer-events:none;background:linear-gradient(0deg,#dcedfb 0,rgba(220,237,251,0) 56px)}
+  .hero-stage{min-height:0;justify-content:flex-start;padding-top:0;padding-bottom:22px;gap:0}
+  .hero-copy .hero-headline{max-width:48%;min-height:70vw;margin:0;display:flex;flex-direction:column;justify-content:center;padding:14px 0 18px}
+  .hero-overline{font-size:.6rem;letter-spacing:.14em}
+  .hero-copy .hero-headline h1{font-size:clamp(1.2rem,5.6vw,1.7rem);line-height:1.05;margin:8px 0;letter-spacing:-.01em;hyphens:manual}
+  .hero-copy .hero-headline p{font-size:.8rem;line-height:1.4;color:#29496b}
+  .hero-copy .hero-bottom{padding-top:6px}
+  .hero-copy{width:100%;max-width:none}
+  .hero-copy .hero-bottom{justify-content:center}
+  .hero-copy .hero-bottom .hero-cta-group{width:100%;flex-direction:row;flex-wrap:nowrap;justify-content:center;gap:8px}
+  .hero-copy .hero-bottom .btn{flex:0 1 auto;justify-content:center;padding:11px 14px;font-size:.8rem;white-space:nowrap}
+  .hero-copy .hero-headline p{font-size:.86rem}
 }
 
 /* Etiquetas de contexto en las fotos (Pileta, Aire libre…): ocultas. Para mostrarlas, quitar la clase "sin-contexto" de #ultra */
 .sin-contexto .sku-context{display:none}
+
+/* FPS 50+ grande y gramos sobre la foto de cada presentación */
+.sku-media.sku-scene::after{content:"";position:absolute;inset:auto 0 0 0;height:48%;background:linear-gradient(0deg,rgba(4,36,75,.55) 0%,rgba(4,36,75,0) 100%);pointer-events:none;z-index:1}
+.sku-fps{position:absolute;left:18px;bottom:12px;z-index:2;display:flex;align-items:flex-start;gap:4px;font-family:var(--display);font-weight:800;font-size:clamp(2.6rem,4.2vw,3.6rem);line-height:.9;letter-spacing:-.02em;color:#fff;text-shadow:0 2px 14px rgba(4,36,75,.35);pointer-events:none}
+.sku-fps small{font-size:.32em;font-weight:700;letter-spacing:.06em;line-height:1;margin-top:.28em}
+.sku-fps{flex-direction:column;gap:0;line-height:.82}
+.sku-fps small{margin:0 0 -.1em .1em;font-size:.3em;letter-spacing:.18em;line-height:1}
+.sku-size{position:absolute;right:16px;bottom:18px;z-index:2;font-size:.82rem;padding:8px 14px;box-shadow:0 6px 16px -6px rgba(4,36,75,.45)}
+.sku-body > h3{margin-top:4px}
+
+/* Activos del sérum: íconos 3D (esferas con foto) */
+.ingredient-orb{position:relative;width:68px;height:68px;flex:0 0 68px;border-radius:50%;isolation:isolate;animation:orb-float 5.2s ease-in-out infinite;filter:drop-shadow(0 12px 8px rgba(2,16,40,.42)) drop-shadow(0 0 14px rgba(120,196,255,.28))}
+.ingredient-orb-img{display:block;width:100%;height:100%;border-radius:50%;object-fit:cover}
+.ingredient-orb::before,.ingredient-orb::after{content:"";position:absolute;inset:0;border-radius:50%;pointer-events:none}
+.ingredient-orb::before{z-index:2;background:radial-gradient(circle at 30% 24%,rgba(255,255,255,.82),rgba(255,255,255,0) 27%),radial-gradient(circle at 74% 84%,rgba(4,24,60,.38),transparent 48%)}
+.ingredient-orb::after{z-index:3;background:linear-gradient(115deg,transparent 38%,rgba(255,255,255,.62) 49%,transparent 60%);background-size:220% 100%;mix-blend-mode:screen;box-shadow:inset 0 0 0 1px rgba(255,255,255,.5),inset 0 -14px 16px rgba(3,20,50,.28);animation:orb-sheen 4.8s ease-in-out infinite}
+.spotlight-ingredient:nth-child(2) .ingredient-orb{animation-delay:-1.3s}
+.spotlight-ingredient:nth-child(3) .ingredient-orb{animation-delay:-2.6s}
+.spotlight-ingredient:nth-child(4) .ingredient-orb{animation-delay:-3.9s}
+.spotlight-ingredient:nth-child(2) .ingredient-orb::after{animation-delay:-1.8s}
+.spotlight-ingredient:nth-child(3) .ingredient-orb::after{animation-delay:-3s}
+.spotlight-ingredient:nth-child(4) .ingredient-orb::after{animation-delay:-.6s}
+.spotlight-ingredient:hover .ingredient-orb,.spotlight-ingredient.is-active .ingredient-orb{filter:drop-shadow(0 14px 10px rgba(2,16,40,.4)) drop-shadow(0 0 18px rgba(255,164,64,.6))}
+@keyframes orb-float{50%{transform:translateY(-6px)}}
+@keyframes orb-sheen{0%,58%{background-position:140% 0}85%,100%{background-position:-50% 0}}
+@media(max-width:575px){.ingredient-orb{width:48px;height:48px;flex-basis:48px}}
+
+/* Carrusel: flechas sobre los extremos de las tarjetas, a media altura */
+.lineup .product-carousel{position:relative}
+.lineup .product-carousel .carousel-arrows{position:absolute;inset:0;z-index:5;pointer-events:none;display:block}
+.lineup .product-carousel .carousel-btn{position:absolute;top:50%;margin-top:-29px;pointer-events:auto;box-shadow:0 10px 24px -8px rgba(4,36,75,.45)}
+.lineup .product-carousel .carousel-btn[data-dir="-1"]{left:max(6px,calc((100vw - 1320px) / 2 - 17px))}
+.lineup .product-carousel .carousel-btn[data-dir="1"]{right:max(6px,calc((100vw - 1320px) / 2 - 17px))}
+.lineup .product-carousel .carousel-btn:hover{transform:none}
+.lineup .product-carousel .carousel-btn:disabled{opacity:0;visibility:hidden}
+@media(max-width:575px){.lineup .product-carousel .carousel-btn{margin-top:-25px}}
+@media(max-width:380px){.hero-copy .hero-bottom .btn{padding:10px 11px;font-size:.74rem}.hero-copy .hero-bottom .hero-cta-group{gap:6px}}
