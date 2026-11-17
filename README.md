@@ -39,3 +39,13 @@ Los textos salen de la gráfica y de la landing anterior; `index.html` quedó in
 - Las imágenes usadas están todas en `images/` (antes `assets/v2/`). `assets/` ya no existe.
 - Tarjetas de Fotosol Ultra: fotos de escena (`images/escena-*.webp`) generadas con IA. Los PNG originales quedaron en `_sources/IA-escenas/`.
 - CSS limpio: se quitaron ~200 reglas de secciones que ya no existen (67 KB → 40 KB), sin cambios visuales.
+
+## SEO, redes y analítica
+- **Metadatos** (`index.html` → `<head>`): título, descripción, canonical, robots, Open Graph y X/Twitter con `images/og/fotosol-og.jpg` (1200×630).
+- **Datos estructurados** (JSON-LD, schema.org): Organization (Laboratorio Cassará), WebSite, WebPage y la lista de los 6 productos.
+- **Íconos**: `favicon.ico`, `icons/` y `site.webmanifest`.
+- **Buscadores**: `robots.txt` y `sitemap.xml` (con imágenes).
+- **URL base**: está cargada `https://rosariogebala-cyber.github.io/Cassara-Fotosol/` en canonical, og:url, og:image, JSON-LD, robots.txt y sitemap.xml. Si se publica con otro dominio, buscar y reemplazar esa URL en esos archivos.
+- **Google Analytics 4**: pegar el ID de medición en `js/analytics.js` (`GA_ID`). Hasta entonces no se carga nada. GA se activa solo si la persona acepta el aviso de cookies; eventos: `cta_click`, `filtro_familia`, `carrusel_flecha`, `ver_activo`, `video_sonido`, `video_visto`.
+- **Search Console**: descomentar la meta `google-site-verification` del `<head>` con el código que da Google y enviar `sitemap.xml`.
+- **W3C**: HTML y CSS validan sin errores ni avisos (Nu HTML Checker).
