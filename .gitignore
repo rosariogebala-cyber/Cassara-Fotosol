@@ -1,0 +1,8 @@
+# Material fuente pesado (2 GB+) y descartes: quedan solo en la carpeta local
+_sources/
+_old/
+.cursor/
+.DS_Store
+*.zip
+*.psd
+*.ai
