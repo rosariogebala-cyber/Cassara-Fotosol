@@ -499,8 +499,6 @@ a.pc-media{text-decoration:none;color:inherit;min-width:0;max-width:100%}
 }
 .campaign-video-frame{z-index:1}
 
-/* Tipografía de títulos: Geogrotesque (la del packaging Fotosol), interletrado abierto.
-   Para volver a Manrope, borrar este bloque. */
 :root{--display:"Barlow",Manrope,sans-serif;--track-xl:.01em;--track-lg:.015em;--track-md:.02em}
 h1,h2,h3,.pedestal-badge strong,.plano-wordmark,.plano-spectrum li,.plano-fps,.plano-synergy-row strong,.closing-family strong,.ultra-panel .ultra-claim,.ultra-spec dt{font-family:var(--display)}
 h1,.hero-headline h1{font-weight:600;letter-spacing:var(--track-xl);line-height:1.04}

@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /dashboard/
 
 Sitemap: https://rosariogebala-cyber.github.io/Cassara-Fotosol/sitemap.xml
