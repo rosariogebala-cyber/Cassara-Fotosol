@@ -617,3 +617,6 @@ h3,.ritual-step h3,.sku h3,.pc-body h3,.closing-family strong,.ultra-spec dt{fon
   .hero-copy .hero-bottom .hero-cta-group{width:100%;flex-direction:row;flex-wrap:nowrap;gap:8px}
   .hero-copy .hero-bottom .btn{flex:1 1 0;justify-content:center;padding:11px 10px;font-size:.8rem;white-space:nowrap}
 }
+
+/* Etiquetas de contexto en las fotos (Pileta, Aire libre…): ocultas. Para mostrarlas, quitar la clase "sin-contexto" de #ultra */
+.sin-contexto .sku-context{display:none}
