@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Dashboard · Landing Fotosol</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#04244b">
+  <link rel="icon" href="../favicon.ico" sizes="any">
+  <link rel="icon" href="../icons/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&amp;family=JetBrains+Mono:wght@500&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+<header class="db-header">
+  <div class="db-wrap db-header-in">
+    <a class="db-brand" href="../" aria-label="Volver a la landing Fotosol">FOTOS<span class="db-sun" aria-hidden="true"></span>L <small>Dashboard</small></a>
+    <div class="db-actions">
+      <div class="db-range" role="group" aria-label="Período">
+        <button type="button" data-days="7" aria-pressed="false">7 días</button>
+        <button type="button" data-days="28" class="is-active" aria-pressed="true">28 días</button>
+        <button type="button" data-days="90" aria-pressed="false">90 días</button>
+      </div>
+      <button type="button" class="db-login" id="db-login" hidden>Entrar con Google</button>
+      <button type="button" class="db-logout" id="db-logout" hidden>Salir</button>
+    </div>
+  </div>
+</header>
+
+<main class="db-wrap db-main">
+  <h1 class="db-title">Cómo se usa la landing</h1>
+  <div class="db-status" id="db-status" role="status" aria-live="polite"></div>
+
+  <section class="db-setup" id="db-setup" hidden aria-labelledby="setup-title">
+    <h2 id="setup-title">Cómo conectar el dashboard a Google Analytics</h2>
+    <p>Mientras tanto se muestran <strong>datos de ejemplo</strong>, para ver cómo se va a ver. Son 4 pasos, se hacen una sola vez:</p>
+    <ol>
+      <li><strong>Google Analytics 4:</strong> creá la propiedad y pegá el ID de medición (<code>G-…</code>) en <code>js/analytics.js</code>. Anotá también el <em>ID de la propiedad</em> (número) en Administrar → Detalles de la propiedad.</li>
+      <li><strong>Dimensiones personalizadas:</strong> en Administrar → Definiciones personalizadas → Crear dimensión personalizada (alcance <em>Evento</em>), creá una por cada parámetro: <code>seccion</code>, <code>producto</code>, <code>familia</code>, <code>ubicacion</code>, <code>activo</code>, <code>link_text</code>, <code>profundidad</code>, <code>estado</code> (nombre y parámetro iguales).</li>
+      <li><strong>Google Cloud:</strong> en console.cloud.google.com creá un proyecto, activá la <em>Google Analytics Data API</em>, configurá la pantalla de consentimiento OAuth y creá un <em>ID de cliente OAuth</em> tipo “Aplicación web” con origen autorizado <code>https://rosariogebala-cyber.github.io</code>.</li>
+      <li><strong>Configuración:</strong> pegá el ID de cliente y el ID de la propiedad en <code>dashboard/config.js</code>. Cada persona que quiera ver el dashboard necesita acceso de lectura a la propiedad de Analytics.</li>
+    </ol>
+    <p class="db-note">Los datos nuevos aparecen en Analytics con hasta 24–48 h de demora, y las dimensiones personalizadas solo cuentan desde el día en que se crean.</p>
+  </section>
+
+  <section class="db-kpis" aria-label="Resumen">
+    <article class="db-kpi"><h2>Usuarios</h2><p class="db-num" data-kpi="users">—</p></article>
+    <article class="db-kpi"><h2>Sesiones</h2><p class="db-num" data-kpi="sessions">—</p></article>
+    <article class="db-kpi"><h2>Tiempo de interacción promedio</h2><p class="db-num" data-kpi="engagement">—</p></article>
+    <article class="db-kpi"><h2>Llegaron al final</h2><p class="db-num" data-kpi="bottom">—</p><p class="db-sub">scroll al 100&nbsp;%</p></article>
+    <article class="db-kpi"><h2>Video: reproducciones</h2><p class="db-num" data-kpi="videoPlay">—</p><p class="db-sub" data-kpi="videoDone">—</p></article>
+  </section>
+
+  <section class="db-card db-span-2" aria-labelledby="t-days">
+    <div class="db-card-head"><h2 id="t-days">Visitas por día</h2><p>Usuarios activos</p></div>
+    <div class="db-chart db-chart-line"><canvas id="c-days" aria-label="Gráfico de usuarios por día"></canvas></div>
+  </section>
+
+  <div class="db-grid">
+    <section class="db-card" aria-labelledby="t-sections">
+      <div class="db-card-head"><h2 id="t-sections">Secciones más vistas</h2><p>Veces que cada sección apareció en pantalla</p></div>
+      <div class="db-chart"><canvas id="c-sections" aria-label="Gráfico de secciones más vistas"></canvas></div>
+    </section>
+
+    <section class="db-card" aria-labelledby="t-scroll">
+      <div class="db-card-head"><h2 id="t-scroll">Hasta dónde bajan</h2><p>Personas que llegaron a cada punto de la página</p></div>
+      <div class="db-chart"><canvas id="c-scroll" aria-label="Gráfico de profundidad de scroll"></canvas></div>
+    </section>
+
+    <section class="db-card db-span-2" aria-labelledby="t-products">
+      <div class="db-card-head"><h2 id="t-products">Productos: vistos y clics</h2><p>Vistas = la tarjeta apareció en pantalla. Clics = tocaron un link o botón de la tarjeta.</p></div>
+      <div class="db-chart db-chart-tall"><canvas id="c-products" aria-label="Gráfico de vistas y clics por producto"></canvas></div>
+      <div class="db-table-wrap"><table class="db-table" id="t-products-table"><caption class="db-sr">Vistas, clics y tasa de clic por producto</caption><thead><tr><th scope="col">Producto</th><th scope="col">Vistas</th><th scope="col">Clics</th><th scope="col">Tasa de clic</th></tr></thead><tbody></tbody></table></div>
+    </section>
+
+    <section class="db-card" aria-labelledby="t-actives">
+      <div class="db-card-head"><h2 id="t-actives">Activos del sérum abiertos</h2><p>Clics en cada activo</p></div>
+      <div class="db-chart db-chart-short"><canvas id="c-actives" aria-label="Gráfico de activos del sérum abiertos"></canvas></div>
+    </section>
+
+    <section class="db-card" aria-labelledby="t-families">
+      <div class="db-card-head"><h2 id="t-families">Filtros del carrusel</h2><p>Clics en cada familia</p></div>
+      <div class="db-chart db-chart-short"><canvas id="c-families" aria-label="Gráfico de filtros del carrusel"></canvas></div>
+    </section>
+
+    <section class="db-card" aria-labelledby="t-ctas">
+      <div class="db-card-head"><h2 id="t-ctas">Botones y links más usados</h2><p>Top 10</p></div>
+      <div class="db-table-wrap"><table class="db-table" id="t-ctas-table"><caption class="db-sr">Botones y links más usados</caption><thead><tr><th scope="col">Texto</th><th scope="col">Clics</th></tr></thead><tbody></tbody></table></div>
+    </section>
+
+    <section class="db-card" aria-labelledby="t-sources">
+      <div class="db-card-head"><h2 id="t-sources">De dónde llegan</h2><p>Canal de la sesión</p></div>
+      <div class="db-chart db-chart-short"><canvas id="c-sources" aria-label="Gráfico de canales de tráfico"></canvas></div>
+    </section>
+
+    <section class="db-card" aria-labelledby="t-devices">
+      <div class="db-card-head"><h2 id="t-devices">Dispositivos</h2><p>Usuarios</p></div>
+      <div class="db-chart db-chart-short"><canvas id="c-devices" aria-label="Gráfico de dispositivos"></canvas></div>
+    </section>
+
+    <section class="db-card" aria-labelledby="t-cities">
+      <div class="db-card-head"><h2 id="t-cities">Ciudades</h2><p>Top 10 por usuarios</p></div>
+      <div class="db-table-wrap"><table class="db-table" id="t-cities-table"><caption class="db-sr">Ciudades con más usuarios</caption><thead><tr><th scope="col">Ciudad</th><th scope="col">Usuarios</th></tr></thead><tbody></tbody></table></div>
+    </section>
+  </div>
+</main>
+
+<footer class="db-footer db-wrap">
+  <p>Datos de Google Analytics 4 · Solo lectura · <a href="../">Volver a la landing</a></p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js" defer></script>
+<script src="config.js" defer></script>
+<script src="dashboard.js" defer></script>
+</body>
+</html>

@@ -241,7 +241,7 @@
 
 <main id="contenido">
   <!-- 01 · INICIO -->
-  <section class="hero hero-editorial" id="inicio" aria-labelledby="hero-title">
+  <section class="hero hero-editorial" id="inicio" data-seccion="Inicio" aria-labelledby="hero-title">
     <img class="hero-still" src="images/hero-sonrisa-crema.webp" width="1672" height="941" alt="Mujer sonriente aplicándose crema en el rostro" fetchpriority="high">
 
     <div class="container-xl hero-stage">
@@ -321,7 +321,7 @@
   </div>
 
   <!-- 02 · NUEVA IMAGEN: video de campaña (crema 100 g) -->
-  <section class="campaign section-pad" id="campana" aria-labelledby="campana-title">
+  <section class="campaign section-pad" id="campana" data-seccion="Nueva imagen (video)" aria-labelledby="campana-title">
     <div class="container-xl">
       <div class="campaign-grid">
         <div class="campaign-copy reveal">
@@ -354,7 +354,7 @@
   </section>
 
   <!-- 03 · FOTOSOL ULTRA 50+: protección y presentaciones -->
-  <section class="ultra-line section-pad" id="ultra" aria-labelledby="presentaciones-title">
+  <section class="ultra-line section-pad" id="ultra" data-seccion="Ultra 50+ · Presentaciones" aria-labelledby="presentaciones-title">
     <div class="container-xl">
       <div class="section-heading ultra-textures-head reveal" id="presentaciones">
         <h2 id="presentaciones-title">Tu textura. <span class="accent">La misma&nbsp;protección.</span></h2>
@@ -383,7 +383,7 @@
       </div>
 
       <div class="sku-grid">
-        <article class="sku" id="sku-spray">
+        <article class="sku" id="sku-spray" data-producto="Ultra 50+ · Spray 150 ml" data-familia="Ultra 50+">
           <div class="sku-media sku-scene">
             <img src="images/escena-spray-150ml.webp" width="1100" height="1100" alt="Fotosol Ultra 50+ spray continuo 150 ml junto a una pileta" loading="lazy">
             <span class="sku-context">Pileta</span>
@@ -404,7 +404,7 @@
           </div>
         </article>
 
-        <article class="sku is-featured" id="sku-crema-100">
+        <article class="sku is-featured" id="sku-crema-100" data-producto="Ultra 50+ · Crema 100 g" data-familia="Ultra 50+">
           <div class="sku-media sku-scene">
             <img src="images/escena-crema-100g.webp" width="1100" height="1204" alt="Fotosol Ultra 50+ crema 100 g sobre una roca, con montañas de fondo" loading="lazy">
             <span class="sku-context">Aire libre</span>
@@ -425,7 +425,7 @@
           </div>
         </article>
 
-        <article class="sku" id="sku-crema-50">
+        <article class="sku" id="sku-crema-50" data-producto="Ultra 50+ · Crema 50 g" data-familia="Ultra 50+">
           <div class="sku-media sku-scene">
             <img src="images/escena-crema-50g.webp" width="1100" height="1100" alt="Fotosol Ultra 50+ crema 50 g en la arena de la playa" loading="lazy">
             <span class="sku-context">Playa</span>
@@ -445,7 +445,7 @@
           </div>
         </article>
 
-        <article class="sku is-featured" id="sku-serum">
+        <article class="sku is-featured" id="sku-serum" data-producto="Ultra 50+ · Sérum 30 ml" data-familia="Ultra 50+">
           <div class="sku-media sku-scene">
             <img src="images/escena-serum-30ml.webp" width="1100" height="1204" alt="Fotosol Ultra 50+ sérum 30 ml en la mesada de un baño" loading="lazy">
             <span class="sku-context">Hogar</span>
@@ -470,7 +470,7 @@
   </section>
 
   <!-- 04 · SÉRUM: activos -->
-  <section class="serum-spotlight section-pad" id="serum-destacado" aria-labelledby="spotlight-title">
+  <section class="serum-spotlight section-pad" id="serum-destacado" data-seccion="Sérum · Activos" aria-labelledby="spotlight-title">
     <div class="spotlight-aura" aria-hidden="true"></div>
     <div class="container-xl position-relative">
       <div class="section-header-split reveal">
@@ -592,7 +592,7 @@
 
 
   <!-- 05 · USO DIARIO (Ultra) -->
-  <section class="ritual section-pad" id="ritual" aria-labelledby="ritual-title">
+  <section class="ritual section-pad" id="ritual" data-seccion="Uso diario" aria-labelledby="ritual-title">
     <div class="container-xl">
       <div class="row align-items-center gy-5">
         <div class="col-lg-5 reveal">
@@ -643,7 +643,7 @@
   </section>
 
   <!-- 06 · LÍNEA FOTOSOL: carrusel por familia -->
-  <section class="lineup section-pad" id="linea" aria-labelledby="linea-title">
+  <section class="lineup section-pad" id="linea" data-seccion="La línea (carrusel)" aria-labelledby="linea-title">
     <div class="container-xl">
       <div class="section-header-split reveal">
         <div>
@@ -667,7 +667,7 @@
 
     <div class="product-carousel reveal" role="region" aria-roledescription="carrusel" aria-label="Productos de la línea Fotosol">
       <div class="product-track" id="product-track" role="tabpanel" aria-label="Productos" tabindex="0">
-        <article class="pc-slide pc-ultra" data-family="ultra" aria-roledescription="slide">
+        <article class="pc-slide pc-ultra" data-family="ultra" aria-roledescription="slide" data-producto="Ultra 50+ · Spray 150 ml" data-familia="Ultra 50+">
           <a class="pc-media" href="#sku-spray" tabindex="-1"><img src="images/linea-spray-150ml.webp" width="720" height="900" alt="Fotosol Ultra 50+ spray continuo 150 ml" loading="lazy" draggable="false"></a>
           <div class="pc-body">
             <div class="pc-top"><span class="pc-line">ULTRA 50+</span><span class="pc-tag">150 ML</span></div>
@@ -675,7 +675,7 @@
             <a class="pc-link" href="#sku-spray">Ver formato <span aria-hidden="true">→</span></a>
           </div>
         </article>
-        <article class="pc-slide pc-ultra" data-family="ultra" aria-roledescription="slide">
+        <article class="pc-slide pc-ultra" data-family="ultra" aria-roledescription="slide" data-producto="Ultra 50+ · Crema 100 g" data-familia="Ultra 50+">
           <a class="pc-media" href="#sku-crema-100" tabindex="-1"><img src="images/linea-crema-100g.webp" width="720" height="900" alt="Fotosol Ultra 50+ crema 100 g" loading="lazy" draggable="false"></a>
           <div class="pc-body">
             <div class="pc-top"><span class="pc-line">ULTRA 50+</span><span class="pc-tag tag-orange">NUEVA</span></div>
@@ -683,7 +683,7 @@
             <a class="pc-link" href="#sku-crema-100">Ver formato <span aria-hidden="true">→</span></a>
           </div>
         </article>
-        <article class="pc-slide pc-ultra" data-family="ultra" aria-roledescription="slide">
+        <article class="pc-slide pc-ultra" data-family="ultra" aria-roledescription="slide" data-producto="Ultra 50+ · Crema 50 g" data-familia="Ultra 50+">
           <a class="pc-media" href="#sku-crema-50" tabindex="-1"><img src="images/linea-crema-50g.webp" width="720" height="900" alt="Fotosol Ultra 50+ crema 50 g" loading="lazy" draggable="false"></a>
           <div class="pc-body">
             <div class="pc-top"><span class="pc-line">ULTRA 50+</span><span class="pc-tag">50 G</span></div>
@@ -691,7 +691,7 @@
             <a class="pc-link" href="#sku-crema-50">Ver formato <span aria-hidden="true">→</span></a>
           </div>
         </article>
-        <article class="pc-slide pc-ultra" data-family="ultra" aria-roledescription="slide">
+        <article class="pc-slide pc-ultra" data-family="ultra" aria-roledescription="slide" data-producto="Ultra 50+ · Sérum 30 ml" data-familia="Ultra 50+">
           <a class="pc-media" href="#sku-serum" tabindex="-1"><img src="images/linea-serum-30ml.webp" width="720" height="900" alt="Fotosol Ultra 50+ sérum 30 ml" loading="lazy" draggable="false"></a>
           <div class="pc-body">
             <div class="pc-top"><span class="pc-line">ULTRA 50+</span><span class="pc-tag tag-orange">NUEVO</span></div>
@@ -699,7 +699,7 @@
             <a class="pc-link" href="#sku-serum">Ver formato <span aria-hidden="true">→</span></a>
           </div>
         </article>
-        <article class="pc-slide pc-plano" data-family="plano" aria-roledescription="slide">
+        <article class="pc-slide pc-plano" data-family="plano" aria-roledescription="slide" data-producto="Plano · FPS 33" data-familia="Plano">
           <a class="pc-media" href="#plano" tabindex="-1"><img src="images/plano-33.webp" width="560" height="1278" alt="Fotosol Plano FPS 33, crema con color 30 g" loading="lazy" draggable="false"></a>
           <div class="pc-body">
             <div class="pc-top"><span class="pc-line">FOTOSOL PLANO</span><span class="pc-tag tag-gold">FPS 33</span></div>
@@ -707,7 +707,7 @@
             <a class="pc-link" href="#plano">Conocer más <span aria-hidden="true">→</span></a>
           </div>
         </article>
-        <article class="pc-slide pc-plano" data-family="plano" aria-roledescription="slide">
+        <article class="pc-slide pc-plano" data-family="plano" aria-roledescription="slide" data-producto="Plano · FPS 50+" data-familia="Plano">
           <a class="pc-media" href="#plano" tabindex="-1"><img src="images/plano-50.webp" width="560" height="1322" alt="Fotosol Plano FPS 50+, crema con color 30 g" loading="lazy" draggable="false"></a>
           <div class="pc-body">
             <div class="pc-top"><span class="pc-line">FOTOSOL PLANO</span><span class="pc-tag tag-gold">FPS 50+</span></div>
@@ -721,7 +721,7 @@
   </section>
 
   <!-- 07 · FOTOSOL PLANO (información propia, separada de Ultra) -->
-  <section class="plano section-pad" id="plano" aria-labelledby="plano-title">
+  <section class="plano section-pad" id="plano" data-seccion="Fotosol Plano" aria-labelledby="plano-title">
     <div class="container-xl">
       <div class="plano-head reveal">
         <div class="plano-wordmark" aria-hidden="true">FOTOS<span class="plano-o"></span>L <b>PLANO</b></div>
@@ -752,7 +752,7 @@
       </div>
 
       <div class="plano-variants">
-        <article class="plano-variant reveal">
+        <article class="plano-variant reveal" data-producto="Plano · FPS 33" data-familia="Plano">
           <img src="images/plano-33.webp" width="560" height="1278" alt="Fotosol Plano FPS 33" loading="lazy">
           <div>
             <span class="plano-fps">33<small>FPS</small></span>
@@ -760,7 +760,7 @@
             <p>Crema ultraligera con color · Cont. neto 30&nbsp;g</p>
           </div>
         </article>
-        <article class="plano-variant reveal">
+        <article class="plano-variant reveal" data-producto="Plano · FPS 50+" data-familia="Plano">
           <img src="images/plano-50.webp" width="560" height="1322" alt="Fotosol Plano FPS 50+" loading="lazy">
           <div>
             <span class="plano-fps">50+<small>FPS</small></span>
@@ -827,7 +827,7 @@
   </section>
 
   <!-- 08 · CIERRE -->
-  <section class="closing" aria-labelledby="closing-title">
+  <section class="closing" data-seccion="Cierre" aria-labelledby="closing-title">
     <div class="closing-glow" aria-hidden="true"></div>
     <div class="container-xl text-center position-relative reveal">
       <span class="eyebrow light">FOTOSOL · LABORATORIO&nbsp;CASSARÁ</span>

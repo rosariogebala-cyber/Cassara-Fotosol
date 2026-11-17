@@ -49,3 +49,19 @@ Los textos salen de la gráfica y de la landing anterior; `index.html` quedó in
 - **Google Analytics 4**: pegar el ID de medición en `js/analytics.js` (`GA_ID`). Hasta entonces no se carga nada. GA se activa solo si la persona acepta el aviso de cookies; eventos: `cta_click`, `filtro_familia`, `carrusel_flecha`, `ver_activo`, `video_sonido`, `video_visto`.
 - **Search Console**: descomentar la meta `google-site-verification` del `<head>` con el código que da Google y enviar `sitemap.xml`.
 - **W3C**: HTML y CSS validan sin errores ni avisos (Nu HTML Checker).
+
+## Dashboard (`dashboard/`)
+
+Panel interno en `https://rosariogebala-cyber.github.io/Cassara-Fotosol/dashboard/` con lo que pasa en la landing: usuarios, visitas por día, secciones más vistas, hasta dónde bajan, productos vistos y clics (con tasa de clic), activos del sérum abiertos, filtros del carrusel, botones más usados, video, canales, dispositivos y ciudades. Períodos de 7, 28 y 90 días.
+
+- Lee Google Analytics 4 con la Data API, entrando con una cuenta de Google que tenga acceso de lectura a la propiedad. No guarda datos ni contraseñas.
+- Sin configurar muestra **datos de ejemplo** (con aviso).
+- No se indexa: `noindex` en la página y `Disallow: /dashboard/` en `robots.txt`.
+
+Para conectarlo:
+1. GA4: pegar el ID de medición en `js/analytics.js` y anotar el ID numérico de la propiedad.
+2. GA4 → Definiciones personalizadas: crear dimensiones de alcance Evento `seccion`, `producto`, `familia`, `ubicacion`, `activo`, `link_text`, `profundidad`, `estado`.
+3. Google Cloud: activar *Google Analytics Data API*, pantalla de consentimiento OAuth y un ID de cliente OAuth "Aplicación web" con origen `https://rosariogebala-cyber.github.io`.
+4. Pegar `CLIENT_ID` y `PROPERTY_ID` en `dashboard/config.js`.
+
+Eventos que manda la landing (solo con cookies aceptadas): `section_view`, `product_view`, `product_click`, `scroll_depth`, `cta_click`, `filtro_familia`, `carrusel_flecha`, `ver_activo`, `video_play`, `video_visto`, `video_sonido`.
