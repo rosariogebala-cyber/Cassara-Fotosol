@@ -375,9 +375,10 @@
 
   /* ---------- Inicio ---------- */
   const start = () => {
-    if (!window.Chart) { setStatus('No se pudo cargar la librería de gráficos. Revisá la conexión y recargá.', 'error'); return; }
-    window.Chart.defaults.font.family = 'DM Sans, system-ui, sans-serif';
-    window.Chart.defaults.color = INK;
+    if (window.Chart) {
+      window.Chart.defaults.font.family = 'DM Sans, system-ui, sans-serif';
+      window.Chart.defaults.color = INK;
+    }
 
     $('#db-setup').hidden = configured;
     loginBtn.hidden = !configured;
@@ -392,6 +393,7 @@
       });
     });
     refresh();
+    if (!window.Chart) setStatus('No se pudieron cargar los gráficos (puede ser un bloqueador del navegador). Los números y las tablas se ven igual.', 'error');
   };
 
   start();
