@@ -31,7 +31,8 @@ after(async () => {
 
 for (const width of [320, 375, 768, 1024, 1440]) {
   test(`responsive ${width}px: navegación, filtro y accesibilidad crítica`, async () => {
-    const page = await browser.newPage({ viewport: { width, height: 900 }, reducedMotion: 'reduce' });
+    const context = await browser.newContext({ viewport: { width, height: 900 }, reducedMotion: 'reduce' });
+    const page = await context.newPage();
     try {
       await page.goto(base, { waitUntil: 'domcontentloaded' });
       await page.locator('h1').waitFor();
@@ -52,7 +53,7 @@ for (const width of [320, 375, 768, 1024, 1440]) {
         id: v.id, impact: v.impact, nodes: v.nodes.map(n => n.target)
       })), null, 2));
     } finally {
-      await page.close();
+      await context.close();
     }
   });
 }
