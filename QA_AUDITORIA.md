@@ -23,3 +23,9 @@ Inspección estática del código fuente mediante GitHub: `index.html`, `css/sty
 
 ## Estado
 Una corrección de JavaScript implementada. No hay evidencia suficiente para declarar auditoría integral terminada, ni objetivos de calidad alcanzados. `main` permanece sin modificaciones.
+
+## Avance adicional (20/11)
+- `css/styles.css`: añadidos estilos `:focus-visible` para controles interactivos. Requiere comprobación visual en fondos claros y oscuros.
+- `tests/static.test.mjs`: añadidas siete pruebas estáticas sin dependencias para semántica básica, SEO, hero, movimiento reducido y foco. **No ejecutadas** en este entorno; ejecutar con `node --test tests/static.test.mjs`.
+- Revisión del carrusel: los botones `.family-tab` usan `role=tab`; pendiente verificar patrón de teclado/ARIA en navegador antes de cambiar comportamiento.
+- No se ha realizado ningún cambio en producción ni en `main`.
