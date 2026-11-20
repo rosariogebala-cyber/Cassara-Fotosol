@@ -178,7 +178,7 @@
     if ('IntersectionObserver' in window) {
       const tio = new IntersectionObserver(entries => entries.forEach(e => {
         if (e.isIntersecting) { typeWord(e.target); tio.unobserve(e.target); }
-      }), { threshold: 1 });
+      }), { threshold: 0.25 });
       typeEls.forEach(el => tio.observe(el));
     } else typeEls.forEach(typeWord);
   }
