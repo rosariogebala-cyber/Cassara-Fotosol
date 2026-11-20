@@ -71,3 +71,10 @@ Una corrección de JavaScript implementada. No hay evidencia suficiente para dec
 - El navegador móvil seleccionó efectivamente `images/hero-mujer-aplicando-crema-800.webp` según el informe `lcp-discovery-insight`; el recurso existe en el repositorio.
 - La siguiente oportunidad de mejora es reducir recursos bloqueantes (estimación Lighthouse **1.000 ms**) y evitar transferencias innecesarias: se detectó descarga de video de campaña de **~2,15 MB** durante la medición móvil, además de CSS no utilizado estimado en **32 KiB**. Estos hallazgos requieren cambios cuidadosamente validados para preservar animaciones, reproducción y estética.
 - Aunque CI aprueba, el LCP móvil aún supera el objetivo de 2,5 s. Pendientes: validación visual humana de secciones animadas, navegación por teclado, W3C y pruebas de producción. No fusionar automáticamente a `main`.
+
+## Segunda etapa — rama perf/mobile-stage-2
+- Se sustituyó la hoja Bootstrap CDN por el subconjunto local `css/bootstrap.min.css` (22.511 bytes en repositorio), para reducir la dependencia de CSS remoto bloqueante. Debe comprobarse que no falten clases en todas las secciones y breakpoints.
+- Video de campaña: el elemento inicia sin `src` y con `preload=none`; JavaScript carga el MP4 al aproximarse a la sección mediante IntersectionObserver, pausa fuera de pantalla y conserva el botón de sonido. Con movimiento reducido se mantiene el control manual.
+- Se añadió regresión de carga diferida y sonido a `tests/browser.test.mjs`.
+- **No se afirma mejora de Lighthouse hasta obtener informes nuevos**. Revisar especialmente video, menú Bootstrap, capturas visuales, LCP móvil, errores de red y accesibilidad.
+- Cambios aislados en PR #2 como borrador. `main` no se modifica en esta etapa.
