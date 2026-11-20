@@ -30,3 +30,10 @@ test('foco visible explícito', () => {
 test('el efecto typewriter se activa al ser parcialmente visible', () => {
   assert.match(js, /threshold: 0\.25/);
 });
+
+test('filtros de productos utilizan botones nativos con estado presionado', () => {
+  assert.match(html, /class="family-tabs reveal" role="group"/);
+  assert.equal((html.match(/class="family-tab[^"]*"[^>]*aria-pressed=/g) || []).length, 3);
+  assert.doesNotMatch(html, /role="tablist"|role="tabpanel"|role="tab"/);
+  assert.match(js, /setAttribute\('aria-pressed', String\(on\)\)/);
+});
