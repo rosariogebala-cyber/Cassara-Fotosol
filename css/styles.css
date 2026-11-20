@@ -664,3 +664,13 @@ h3,.ritual-step h3,.sku h3,.pc-body h3,.closing-family strong,.ultra-spec dt{fon
 .lineup .product-carousel .carousel-btn:disabled{opacity:0;visibility:hidden}
 @media(max-width:575px){.lineup .product-carousel .carousel-btn{margin-top:-25px}}
 @media(max-width:380px){.hero-copy .hero-bottom .btn{padding:10px 11px;font-size:.74rem}.hero-copy .hero-bottom .hero-cta-group{gap:6px}}
+
+/* QA: foco visible uniforme sin alterar el estado visual del mouse. */
+:where(a, button, input, select, textarea, [tabindex]):focus-visible{
+  outline:3px solid #0758a8;
+  outline-offset:3px;
+}
+:where(.btn-orange, .campaign-sound, .carousel-btn):focus-visible{
+  outline:3px solid #04244b;
+  outline-offset:4px;
+}
