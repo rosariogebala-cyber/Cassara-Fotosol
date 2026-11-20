@@ -66,3 +66,21 @@ for (const width of [320, 375, 768, 1024, 1440]) {
     }
   });
 }
+
+// Regresión: no descargar el MP4 de campaña antes de que la sección entre en pantalla.
+test('video de campaña se carga al acercarse y conserva interacción', async () => {
+  const context = await browser.newContext({ viewport: { width: 375, height: 812 }, reducedMotion: 'no-preference' });
+  const page = await context.newPage();
+  try {
+    await page.goto(base, { waitUntil: 'domcontentloaded' });
+    const video = page.locator('#campaign-video');
+    assert.equal(await video.getAttribute('src'), null, 'El MP4 no debe tener src inicial');
+    assert.equal(await video.getAttribute('preload'), 'none');
+    await video.scrollIntoViewIfNeeded();
+    await page.waitForFunction(() => Boolean(document.querySelector('#campaign-video')?.getAttribute('src')));
+    assert.match(await video.getAttribute('src'), /campana-fotosol-100g\\.mp4$/);
+    const sound = page.locator('#campaign-sound');
+    await sound.click();
+    assert.equal(await sound.getAttribute('aria-pressed'), 'true');
+  } finally { await context.close(); }
+});
