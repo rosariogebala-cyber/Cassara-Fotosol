@@ -48,3 +48,10 @@ Una corrección de JavaScript implementada. No hay evidencia suficiente para dec
 - Causa: la prueba usaba `browser.newPage()` sin un contexto Playwright explícito; axe-core exige `browser.newContext()` y `context.newPage()`.
 - Corregido `tests/browser.test.mjs` en la rama QA. La corrección del test no modifica la landing. Se espera una nueva ejecución automática de Actions por el commit.
 - Hasta que la nueva ejecución finalice, **no hay resultado válido de axe-core** ni evidencia de cumplimiento WCAG 2.2 AA.
+
+## Revisión previa a publicación — 20/11/2026
+- Commit `c055c7e`: GitHub Actions #44765948684 terminó **success**: pruebas estáticas y Chromium/axe-core en 320, 375, 768, 1024 y 1440 px. Las pruebas axe rechazan violaciones **serias o críticas**; no comprueban exhaustivamente todos los criterios WCAG ni sustituyen revisión manual.
+- Correcciones aplicadas: contraste de elementos detectados por axe y nombre accesible del enlace de marca.
+- Se añadieron capturas completas de cinco viewports, chequeo de desbordamiento horizontal y errores JS, y un job Lighthouse móvil/escritorio. **Pendiente** comprobar que estos nuevos jobs finalizan y revisar capturas e informes; no se inventan puntuaciones.
+- Los informes Lighthouse usan servidor local en GitHub Actions; los resultados de la URL pública pueden variar por caché, red y hosting.
+- Sigue pendiente la inspección humana de capturas, teclado, lector de pantalla, validación W3C y comprobación de enlaces/red. No se fusiona a `main` hasta finalizar QA.
