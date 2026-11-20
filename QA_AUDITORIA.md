@@ -63,3 +63,11 @@ Una corrección de JavaScript implementada. No hay evidencia suficiente para dec
 - Oportunidades Lighthouse Mobile: recursos CSS bloqueantes (estimación **900 ms**); imagen de campaña/poster y hero sobredimensionadas (estimación **181 KiB** en conjunto con otros recursos); CSS no usado (estimación **32 KiB**). El elemento LCP identificado fue `img.hero-still` (`images/hero-mujer-aplicando-crema.webp`).
 - Las capturas automatizadas fueron generadas y se inspeccionó una vista general; algunas secciones aparecen sin contenido renderizado en capturas de página completa (potencialmente por animación/IntersectionObserver y capturas sin scroll). **No se puede dar por aprobada la revisión visual fina** sin recorrer la página y comprobar esos estados; el test actual no reemplaza esta comprobación.
 - Las cifras son una medición sintética puntual de GitHub Actions contra localhost, no resultados de usuarios reales ni de GitHub Pages publicado. No se verificó W3C ni un recorrido manual completo de teclado/lector de pantalla. **No publicar sin revisión de estos pendientes**.
+
+## Revalidación de hero responsive — commit 40fa030
+- GitHub Actions #44770077697: **success** en Lighthouse, Chromium/axe y validaciones estáticas.
+- Lighthouse Mobile: Performance **84** (antes 77), Accessibility **100**, Best Practices **100**, SEO **100**. LCP **4,28 s** (antes 5,43 s), TBT **59 ms** (antes 130 ms).
+- Lighthouse Desktop: Performance **100** (antes 99), Accessibility **100**, Best Practices **100**, SEO **100**.
+- El navegador móvil seleccionó efectivamente `images/hero-mujer-aplicando-crema-800.webp` según el informe `lcp-discovery-insight`; el recurso existe en el repositorio.
+- La siguiente oportunidad de mejora es reducir recursos bloqueantes (estimación Lighthouse **1.000 ms**) y evitar transferencias innecesarias: se detectó descarga de video de campaña de **~2,15 MB** durante la medición móvil, además de CSS no utilizado estimado en **32 KiB**. Estos hallazgos requieren cambios cuidadosamente validados para preservar animaciones, reproducción y estética.
+- Aunque CI aprueba, el LCP móvil aún supera el objetivo de 2,5 s. Pendientes: validación visual humana de secciones animadas, navegación por teclado, W3C y pruebas de producción. No fusionar automáticamente a `main`.
