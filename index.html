@@ -642,10 +642,10 @@
           <p class="lineup-lead">Dos familias, cada una con su protección: Fotosol Ultra&nbsp;50+ y Fotosol&nbsp;Plano.</p>
         </div>
       </div>
-      <div class="family-tabs reveal" role="tablist" aria-label="Filtrar por familia">
-        <button class="family-tab is-active" type="button" role="tab" aria-controls="product-track" aria-selected="true" data-family="all">Toda la línea</button>
-        <button class="family-tab" type="button" role="tab" aria-controls="product-track" aria-selected="false" data-family="ultra">Fotosol Ultra 50+ <small data-count="ultra"></small></button>
-        <button class="family-tab tab-plano" type="button" role="tab" aria-controls="product-track" aria-selected="false" data-family="plano">Fotosol Plano <small data-count="plano"></small></button>
+      <div class="family-tabs reveal" role="group" aria-label="Filtrar por familia">
+        <button class="family-tab is-active" type="button" aria-controls="product-track" aria-pressed="true" data-family="all">Toda la línea</button>
+        <button class="family-tab" type="button" aria-controls="product-track" aria-pressed="false" data-family="ultra">Fotosol Ultra 50+ <small data-count="ultra"></small></button>
+        <button class="family-tab tab-plano" type="button" aria-controls="product-track" aria-pressed="false" data-family="plano">Fotosol Plano <small data-count="plano"></small></button>
       </div>
     </div>
 
@@ -654,7 +654,7 @@
             <button class="carousel-btn" type="button" data-dir="-1" aria-label="Producto anterior" aria-controls="product-track"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg></button>
             <button class="carousel-btn" type="button" data-dir="1" aria-label="Producto siguiente" aria-controls="product-track"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></button>
           </div>
-      <div class="product-track" id="product-track" role="tabpanel" aria-label="Productos" tabindex="0">
+      <div class="product-track" id="product-track" role="region" aria-label="Productos" tabindex="0">
         <article class="pc-slide pc-ultra" data-family="ultra" aria-roledescription="slide" data-producto="Ultra 50+ · Spray 150 ml" data-familia="Ultra 50+">
           <a class="pc-media" href="#sku-spray" tabindex="-1"><img src="images/linea-spray-150ml.webp" width="720" height="900" alt="Fotosol Ultra 50+ spray continuo 150 ml" loading="lazy" draggable="false"></a>
           <div class="pc-body">
