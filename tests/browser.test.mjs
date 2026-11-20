@@ -41,6 +41,15 @@ for (const width of [320, 375, 768, 1024, 1440]) {
       await page.goto(base, { waitUntil: 'domcontentloaded' });
       await page.locator('h1').waitFor();
       await page.evaluate(() => document.fonts.ready);
+      // Validar carga real del hero: Lighthouse puede aprobar aunque una imagen dé 404.
+      await page.locator('.hero-still').evaluate(async img => {
+        if (!img.complete) await new Promise((resolve, reject) => {
+          img.addEventListener('load', resolve, { once: true });
+          img.addEventListener('error', reject, { once: true });
+        });
+      });
+      const heroLoaded = await page.locator('.hero-still').evaluate(img => img.naturalWidth > 0);
+      assert.ok(heroLoaded, 'El hero debe cargar una imagen válida');
       await page.screenshot({ path: `qa-screenshots/fotosol-${width}.png`, fullPage: true, animations: 'disabled' });
       const horizontalOverflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
       assert.ok(horizontalOverflow <= 1, `Desbordamiento horizontal ${horizontalOverflow}px a ${width}px`);
