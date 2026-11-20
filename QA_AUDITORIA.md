@@ -55,3 +55,11 @@ Una corrección de JavaScript implementada. No hay evidencia suficiente para dec
 - Se añadieron capturas completas de cinco viewports, chequeo de desbordamiento horizontal y errores JS, y un job Lighthouse móvil/escritorio. **Pendiente** comprobar que estos nuevos jobs finalizan y revisar capturas e informes; no se inventan puntuaciones.
 - Los informes Lighthouse usan servidor local en GitHub Actions; los resultados de la URL pública pueden variar por caché, red y hosting.
 - Sigue pendiente la inspección humana de capturas, teclado, lector de pantalla, validación W3C y comprobación de enlaces/red. No se fusiona a `main` hasta finalizar QA.
+
+## Resultados medidos en CI — commit 2726b5b (20/11/2026)
+- GitHub Actions #44766286740: **success** en los tres jobs: validaciones estáticas, Chromium/axe y Lighthouse. Se generaron artefactos `capturas-responsive` (320/375/768/1024/1440 px) y `lighthouse-mobile-desktop` (HTML y JSON).
+- Lighthouse **Mobile** (servidor local CI): Performance **77**, Accessibility **100**, Best Practices **100**, SEO **100**. FCP **1,9 s**, LCP **5,4 s**, TBT **130 ms**, CLS **0,0001**.
+- Lighthouse **Desktop** (servidor local CI): Performance **99**, Accessibility **100**, Best Practices **100**, SEO **100**. FCP **0,6 s**, LCP **0,6 s**, TBT **0 ms**, CLS **0,071**.
+- Oportunidades Lighthouse Mobile: recursos CSS bloqueantes (estimación **900 ms**); imagen de campaña/poster y hero sobredimensionadas (estimación **181 KiB** en conjunto con otros recursos); CSS no usado (estimación **32 KiB**). El elemento LCP identificado fue `img.hero-still` (`images/hero-mujer-aplicando-crema.webp`).
+- Las capturas automatizadas fueron generadas y se inspeccionó una vista general; algunas secciones aparecen sin contenido renderizado en capturas de página completa (potencialmente por animación/IntersectionObserver y capturas sin scroll). **No se puede dar por aprobada la revisión visual fina** sin recorrer la página y comprobar esos estados; el test actual no reemplaza esta comprobación.
+- Las cifras son una medición sintética puntual de GitHub Actions contra localhost, no resultados de usuarios reales ni de GitHub Pages publicado. No se verificó W3C ni un recorrido manual completo de teclado/lector de pantalla. **No publicar sin revisión de estos pendientes**.
