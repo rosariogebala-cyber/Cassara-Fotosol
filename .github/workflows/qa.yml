@@ -39,3 +39,41 @@ jobs:
         run: npx playwright install --with-deps chromium
       - name: Ejecutar auditoría de navegador
         run: node --test tests/browser.test.mjs
+      - name: Conservar capturas responsive
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: capturas-responsive
+          path: qa-screenshots/*.png
+          if-no-files-found: warn
+
+  lighthouse:
+    name: Lighthouse Mobile y Desktop
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Instalar Lighthouse
+        run: npm install --no-save --no-package-lock lighthouse
+      - name: Servir landing local
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 > /tmp/fotosol-server.log 2>&1 &
+          for i in $(seq 1 40); do
+            if curl -fsS http://127.0.0.1:8765/ -o /dev/null; then break; fi
+            sleep 1
+          done
+      - name: Lighthouse Mobile
+        run: npx lighthouse http://127.0.0.1:8765/ --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" --output=json --output=html --output-path=./lighthouse-mobile --quiet
+      - name: Lighthouse Desktop
+        run: npx lighthouse http://127.0.0.1:8765/ --preset=desktop --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" --output=json --output=html --output-path=./lighthouse-desktop --quiet
+      - name: Publicar informes Lighthouse
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-mobile-desktop
+          path: |
+            lighthouse-*.json
+            lighthouse-*.html
+          if-no-files-found: warn
