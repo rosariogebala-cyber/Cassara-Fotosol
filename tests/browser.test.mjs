@@ -3,6 +3,7 @@
 import test, { after, before } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
+import { mkdirSync } from 'node:fs';
 import { setTimeout as delay } from 'node:timers/promises';
 import { chromium } from 'playwright';
 import AxeBuilder from '@axe-core/playwright';
@@ -23,6 +24,7 @@ before(async () => {
     await delay(250);
   }
   browser = await chromium.launch({ headless: true });
+  mkdirSync('qa-screenshots', { recursive: true });
 });
 after(async () => {
   await browser?.close();
@@ -33,9 +35,16 @@ for (const width of [320, 375, 768, 1024, 1440]) {
   test(`responsive ${width}px: navegación, filtro y accesibilidad crítica`, async () => {
     const context = await browser.newContext({ viewport: { width, height: 900 }, reducedMotion: 'reduce' });
     const page = await context.newPage();
+    const pageErrors = [];
+    page.on('pageerror', error => pageErrors.push(error.message));
     try {
       await page.goto(base, { waitUntil: 'domcontentloaded' });
       await page.locator('h1').waitFor();
+      await page.evaluate(() => document.fonts.ready);
+      await page.screenshot({ path: `qa-screenshots/fotosol-${width}.png`, fullPage: true, animations: 'disabled' });
+      const horizontalOverflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
+      assert.ok(horizontalOverflow <= 1, `Desbordamiento horizontal ${horizontalOverflow}px a ${width}px`);
+      assert.deepEqual(pageErrors, [], `Errores JavaScript a ${width}px`);
       assert.equal(await page.locator('h1').count(), 1);
       const all = page.locator('.family-tab[data-family="all"]');
       const ultra = page.locator('.family-tab[data-family="ultra"]');
