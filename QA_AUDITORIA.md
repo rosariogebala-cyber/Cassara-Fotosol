@@ -29,3 +29,10 @@ Una corrección de JavaScript implementada. No hay evidencia suficiente para dec
 - `tests/static.test.mjs`: añadidas siete pruebas estáticas sin dependencias para semántica básica, SEO, hero, movimiento reducido y foco. **No ejecutadas** en este entorno; ejecutar con `node --test tests/static.test.mjs`.
 - Revisión del carrusel: los botones `.family-tab` usan `role=tab`; pendiente verificar patrón de teclado/ARIA en navegador antes de cambiar comportamiento.
 - No se ha realizado ningún cambio en producción ni en `main`.
+
+## Corrección de semántica del filtro de productos
+- `index.html` (aprox. líneas 645–657): el grupo de filtros deja de anunciarse como `tablist` y sus botones dejan de usar `role=tab`/`aria-selected`; se usa `role=group` con botones nativos y `aria-pressed`. El contenedor de productos usa `role=region` en lugar de `tabpanel`.
+- `js/main.js` (aprox. línea 78): se actualiza `aria-pressed` al cambiar de familia.
+- `tests/static.test.mjs`: prueba de regresión para esta semántica. El archivo de pruebas Node aún no se ejecutó.
+- Se ejecutaron siete comprobaciones estáticas sobre el contenido leído desde GitHub, todas positivas: H1 único, tres botones con `aria-pressed`, ausencia de roles tab, sincronización JS, foco visible, umbral typewriter y prioridad del hero. **No son pruebas de navegador**.
+- La clonación Git local se intentó, pero el entorno no pudo resolver `github.com`; no se ejecutaron Lighthouse, axe-core ni W3C.
