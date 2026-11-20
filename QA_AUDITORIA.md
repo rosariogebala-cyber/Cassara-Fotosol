@@ -42,3 +42,9 @@ Una corrección de JavaScript implementada. No hay evidencia suficiente para dec
 - `tests/browser.test.mjs`: smoke tests responsive en 320, 375, 768, 1024 y 1440 px; validan H1, interacción de filtros y ausencia de violaciones axe-core **serias o críticas** para etiquetas WCAG 2.0/2.1/2.2 AA. No reemplaza auditoría manual ni certifica WCAG completa.
 - **Ejecución pendiente**: revisar pestaña Actions del repositorio para ver si los jobs se activaron y corregir eventuales fallos. El entorno actual no pudo ejecutar Chromium ni consultar resultados de CI.
 - Quedan pendientes Lighthouse móvil/escritorio, W3C y regresión visual.
+
+## Primer resultado real de CI y corrección
+- Workflow #44764948706: **validaciones estáticas aprobadas**; el job Chromium/axe-core falló en los cinco viewports con `Please use browser.newContext()`.
+- Causa: la prueba usaba `browser.newPage()` sin un contexto Playwright explícito; axe-core exige `browser.newContext()` y `context.newPage()`.
+- Corregido `tests/browser.test.mjs` en la rama QA. La corrección del test no modifica la landing. Se espera una nueva ejecución automática de Actions por el commit.
+- Hasta que la nueva ejecución finalice, **no hay resultado válido de axe-core** ni evidencia de cumplimiento WCAG 2.2 AA.
