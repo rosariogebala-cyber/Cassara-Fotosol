@@ -78,3 +78,9 @@ Una corrección de JavaScript implementada. No hay evidencia suficiente para dec
 - Se añadió regresión de carga diferida y sonido a `tests/browser.test.mjs`.
 - **No se afirma mejora de Lighthouse hasta obtener informes nuevos**. Revisar especialmente video, menú Bootstrap, capturas visuales, LCP móvil, errores de red y accesibilidad.
 - Cambios aislados en PR #2 como borrador. `main` no se modifica en esta etapa.
+
+### Verificación de etapa 2 — GitHub Actions #44772115227
+- La ejecución de commit `a8b5ed7` terminó en **success** (validaciones estáticas, Playwright/axe responsive, Lighthouse Mobile/Desktop).
+- Lighthouse Mobile etapa 2 (corrida anterior #44771738799): Performance **79** vs **84** anterior, LCP **5,3 s** vs **4,3 s** anterior, FCP **1,8 s** vs **2,0 s**, TBT **50 ms** vs **60 ms**. Desktop Performance **99** vs **100** anterior. Accesibilidad, SEO y buenas prácticas: **100**.
+- Comparación automatizada de capturas full-page a 320, 375, 768, 1024 y 1440 px contra la versión anterior: **idénticas dimensiones** en los cinco casos; diferencias de píxeles >20 por canal inferiores al **0,03 %**, concentradas en una zona pequeña. No se detectan cambios visuales generalizados en estas capturas (tomadas con movimiento reducido).
+- **Decisión:** mantener PR #2 como borrador y no fusionar a main: la mejora de video/CSS no se tradujo en mejor LCP móvil en la medición disponible. Falta inspección visual humana con animaciones activadas y verificación de comportamiento del video en dispositivos reales.
