@@ -36,3 +36,9 @@ Una corrección de JavaScript implementada. No hay evidencia suficiente para dec
 - `tests/static.test.mjs`: prueba de regresión para esta semántica. El archivo de pruebas Node aún no se ejecutó.
 - Se ejecutaron siete comprobaciones estáticas sobre el contenido leído desde GitHub, todas positivas: H1 único, tres botones con `aria-pressed`, ausencia de roles tab, sincronización JS, foco visible, umbral typewriter y prioridad del hero. **No son pruebas de navegador**.
 - La clonación Git local se intentó, pero el entorno no pudo resolver `github.com`; no se ejecutaron Lighthouse, axe-core ni W3C.
+
+## Automatización de QA incorporada
+- `.github/workflows/qa.yml`: dos jobs de GitHub Actions para pruebas estáticas y Chromium con axe-core, disparados por push/PR/manual.
+- `tests/browser.test.mjs`: smoke tests responsive en 320, 375, 768, 1024 y 1440 px; validan H1, interacción de filtros y ausencia de violaciones axe-core **serias o críticas** para etiquetas WCAG 2.0/2.1/2.2 AA. No reemplaza auditoría manual ni certifica WCAG completa.
+- **Ejecución pendiente**: revisar pestaña Actions del repositorio para ver si los jobs se activaron y corregir eventuales fallos. El entorno actual no pudo ejecutar Chromium ni consultar resultados de CI.
+- Quedan pendientes Lighthouse móvil/escritorio, W3C y regresión visual.
