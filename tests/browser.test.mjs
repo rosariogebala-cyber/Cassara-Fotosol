@@ -87,7 +87,7 @@ test('video de campaña se carga al acercarse y conserva interacción', async ()
     assert.equal(await video.getAttribute('preload'), 'none');
     await video.scrollIntoViewIfNeeded();
     await page.waitForFunction(() => Boolean(document.querySelector('#campaign-video')?.getAttribute('src')));
-    assert.match(await video.getAttribute('src'), /campana-fotosol-100g\\.mp4$/);
+    assert.ok((await video.getAttribute('src')).endsWith('campana-fotosol-100g.mp4'));
     const sound = page.locator('#campaign-sound');
     await sound.click();
     assert.equal(await sound.getAttribute('aria-pressed'), 'true');
