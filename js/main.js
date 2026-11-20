@@ -156,6 +156,42 @@
     });
   }
 
+  // Diferir el MP4 fuera de pantalla; conservar autoplay mudo al acercarse,
+  // control de sonido y pausa al salir. Respetar movimiento reducido.
+  if (campaignVideo) {
+    let videoStarted = false;
+    const loadCampaign = () => {
+      if (videoStarted) return;
+      videoStarted = true;
+      const src = campaignVideo.dataset.src;
+      if (src) {
+        campaignVideo.src = src;
+        campaignVideo.removeAttribute('data-src');
+        campaignVideo.load();
+      }
+      if (!reducedMotion) campaignVideo.play().catch(() => {});
+    };
+    if (reducedMotion) {
+      campaignVideo.controls = true;
+      // La persona decide cuándo cargar/reproducir el video.
+      campaignVideo.addEventListener('pointerdown', loadCampaign, { once: true });
+      campaignVideo.addEventListener('keydown', loadCampaign, { once: true });
+    } else if ('IntersectionObserver' in window) {
+      const campaignObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            loadCampaign();
+            campaignVideo.play().catch(() => {});
+          } else if (videoStarted) {
+            campaignVideo.pause();
+          }
+        });
+      }, { rootMargin: '250px 0px' });
+      campaignObserver.observe(campaignVideo);
+    } else loadCampaign();
+    soundBtn?.addEventListener('click', loadCampaign, { once: true });
+  }
+
   // Typewriter: cada .type[data-word] se escribe letra por letra al entrar en pantalla
   const typeEls = [...document.querySelectorAll('.type[data-word]')];
   typeEls.forEach(el => {
