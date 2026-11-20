@@ -1,0 +1,41 @@
+name: QA estático y accesibilidad
+on:
+  push:
+    branches: [main, qa/auditoria-optimizacion]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  static:
+    name: Validaciones estáticas
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Pruebas estáticas de regresión
+        run: node --test tests/static.test.mjs
+      - name: Sintaxis de JavaScript
+        run: |
+          node --check js/main.js
+          node --check js/analytics.js
+
+  accessibility:
+    name: Axe WCAG y responsive
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Instalar herramientas QA
+        run: npm install --no-save --no-package-lock playwright @axe-core/playwright
+      - name: Instalar navegador
+        run: npx playwright install --with-deps chromium
+      - name: Ejecutar auditoría de navegador
+        run: node --test tests/browser.test.mjs
