@@ -64,8 +64,22 @@ jobs:
             if curl -fsS http://127.0.0.1:8765/ -o /dev/null; then break; fi
             sleep 1
           done
-      - name: Lighthouse Mobile
-        run: npx lighthouse http://127.0.0.1:8765/ --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" --output=json --output=html --output-path=./lighthouse-mobile --quiet
+      - name: Lighthouse Mobile (3 mediciones independientes)
+        run: |
+          for i in 1 2 3; do
+            npx lighthouse http://127.0.0.1:8765/ --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" --output=json --output=html --output-path="./lighthouse-mobile-run-$i" --quiet
+          done
+          node - <<'NODE'
+          const fs = require('fs');
+          const runs = [1, 2, 3].map(i => {
+            const d = JSON.parse(fs.readFileSync(`lighthouse-mobile-run-${i}.report.json`, 'utf8'));
+            return { run: i, score: Math.round(d.categories.performance.score * 100), lcp_ms: Math.round(d.audits['largest-contentful-paint'].numericValue), fcp_ms: Math.round(d.audits['first-contentful-paint'].numericValue), tbt_ms: Math.round(d.audits['total-blocking-time'].numericValue) };
+          });
+          const sorted = [...runs].sort((a, b) => a.lcp_ms - b.lcp_ms);
+          const summary = { runs, medianLcpMs: sorted[1].lcp_ms, medianMobileScore: [...runs].sort((a,b)=>a.score-b.score)[1].score };
+          fs.writeFileSync('lighthouse-mobile-summary.json', JSON.stringify(summary, null, 2));
+          console.log(JSON.stringify(summary, null, 2));
+          NODE
       - name: Lighthouse Desktop
         run: npx lighthouse http://127.0.0.1:8765/ --preset=desktop --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" --output=json --output=html --output-path=./lighthouse-desktop --quiet
       - name: Publicar informes Lighthouse
@@ -76,4 +90,5 @@ jobs:
           path: |
             lighthouse-*.json
             lighthouse-*.html
+            lighthouse-mobile-summary.json
           if-no-files-found: warn

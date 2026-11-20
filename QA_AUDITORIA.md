@@ -71,3 +71,16 @@ Una corrección de JavaScript implementada. No hay evidencia suficiente para dec
 - El navegador móvil seleccionó efectivamente `images/hero-mujer-aplicando-crema-800.webp` según el informe `lcp-discovery-insight`; el recurso existe en el repositorio.
 - La siguiente oportunidad de mejora es reducir recursos bloqueantes (estimación Lighthouse **1.000 ms**) y evitar transferencias innecesarias: se detectó descarga de video de campaña de **~2,15 MB** durante la medición móvil, además de CSS no utilizado estimado en **32 KiB**. Estos hallazgos requieren cambios cuidadosamente validados para preservar animaciones, reproducción y estética.
 - Aunque CI aprueba, el LCP móvil aún supera el objetivo de 2,5 s. Pendientes: validación visual humana de secciones animadas, navegación por teclado, W3C y pruebas de producción. No fusionar automáticamente a `main`.
+
+## Segunda etapa — rama perf/mobile-stage-2
+- Se sustituyó la hoja Bootstrap CDN por el subconjunto local `css/bootstrap.min.css` (22.511 bytes en repositorio), para reducir la dependencia de CSS remoto bloqueante. Debe comprobarse que no falten clases en todas las secciones y breakpoints.
+- Video de campaña: el elemento inicia sin `src` y con `preload=none`; JavaScript carga el MP4 al aproximarse a la sección mediante IntersectionObserver, pausa fuera de pantalla y conserva el botón de sonido. Con movimiento reducido se mantiene el control manual.
+- Se añadió regresión de carga diferida y sonido a `tests/browser.test.mjs`.
+- **No se afirma mejora de Lighthouse hasta obtener informes nuevos**. Revisar especialmente video, menú Bootstrap, capturas visuales, LCP móvil, errores de red y accesibilidad.
+- Cambios aislados en PR #2 como borrador. `main` no se modifica en esta etapa.
+
+### Verificación de etapa 2 — GitHub Actions #44772115227
+- La ejecución de commit `a8b5ed7` terminó en **success** (validaciones estáticas, Playwright/axe responsive, Lighthouse Mobile/Desktop).
+- Lighthouse Mobile etapa 2 (corrida anterior #44771738799): Performance **79** vs **84** anterior, LCP **5,3 s** vs **4,3 s** anterior, FCP **1,8 s** vs **2,0 s**, TBT **50 ms** vs **60 ms**. Desktop Performance **99** vs **100** anterior. Accesibilidad, SEO y buenas prácticas: **100**.
+- Comparación automatizada de capturas full-page a 320, 375, 768, 1024 y 1440 px contra la versión anterior: **idénticas dimensiones** en los cinco casos; diferencias de píxeles >20 por canal inferiores al **0,03 %**, concentradas en una zona pequeña. No se detectan cambios visuales generalizados en estas capturas (tomadas con movimiento reducido).
+- **Decisión:** mantener PR #2 como borrador y no fusionar a main: la mejora de video/CSS no se tradujo en mejor LCP móvil en la medición disponible. Falta inspección visual humana con animaciones activadas y verificación de comportamiento del video en dispositivos reales.
