@@ -40,7 +40,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-  <link rel="preload" href="images/hero-mujer-aplicando-crema.webp" as="image" type="image/webp" fetchpriority="high">
+  <link rel="preload" href="images/hero-mujer-aplicando-crema-800.webp" as="image" type="image/webp" media="(max-width: 767px)" fetchpriority="high">
+  <link rel="preload" href="images/hero-mujer-aplicando-crema.webp" as="image" type="image/webp" media="(min-width: 768px)" fetchpriority="high">
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
@@ -219,7 +220,7 @@
 
 <header class="site-header" id="site-header">
   <nav class="navbar navbar-expand-lg container-xl" aria-label="Navegación principal">
-    <a class="brand" href="#inicio" aria-label="Fotosol inicio">
+    <a class="brand" href="#inicio" aria-label="Fotosol Cassará — inicio">
       <span class="brand-word">FOTO<span>S<span class="brand-sun">O</span>L</span></span>
       <span class="brand-badge">CASSARÁ</span>
     </a>
@@ -242,7 +243,7 @@
 <main id="contenido">
   <!-- 01 · INICIO -->
   <section class="hero hero-editorial" id="inicio" data-seccion="Inicio" aria-labelledby="hero-title">
-    <img class="hero-still" src="images/hero-mujer-aplicando-crema.webp" width="1671" height="941" alt="Mujer aplicándose crema facial" fetchpriority="high">
+    <img class="hero-still" src="images/hero-mujer-aplicando-crema.webp" srcset="images/hero-mujer-aplicando-crema-800.webp 800w, images/hero-mujer-aplicando-crema.webp 1671w" sizes="(max-width: 767px) 100vw, 1671px" width="1671" height="941" alt="Mujer aplicándose crema facial" fetchpriority="high" decoding="async">
 
     <div class="container-xl hero-stage">
       <div class="hero-copy">
@@ -642,10 +643,10 @@
           <p class="lineup-lead">Dos familias, cada una con su protección: Fotosol Ultra&nbsp;50+ y Fotosol&nbsp;Plano.</p>
         </div>
       </div>
-      <div class="family-tabs reveal" role="tablist" aria-label="Filtrar por familia">
-        <button class="family-tab is-active" type="button" role="tab" aria-controls="product-track" aria-selected="true" data-family="all">Toda la línea</button>
-        <button class="family-tab" type="button" role="tab" aria-controls="product-track" aria-selected="false" data-family="ultra">Fotosol Ultra 50+ <small data-count="ultra"></small></button>
-        <button class="family-tab tab-plano" type="button" role="tab" aria-controls="product-track" aria-selected="false" data-family="plano">Fotosol Plano <small data-count="plano"></small></button>
+      <div class="family-tabs reveal" role="group" aria-label="Filtrar por familia">
+        <button class="family-tab is-active" type="button" aria-controls="product-track" aria-pressed="true" data-family="all">Toda la línea</button>
+        <button class="family-tab" type="button" aria-controls="product-track" aria-pressed="false" data-family="ultra">Fotosol Ultra 50+ <small data-count="ultra"></small></button>
+        <button class="family-tab tab-plano" type="button" aria-controls="product-track" aria-pressed="false" data-family="plano">Fotosol Plano <small data-count="plano"></small></button>
       </div>
     </div>
 
@@ -654,7 +655,7 @@
             <button class="carousel-btn" type="button" data-dir="-1" aria-label="Producto anterior" aria-controls="product-track"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg></button>
             <button class="carousel-btn" type="button" data-dir="1" aria-label="Producto siguiente" aria-controls="product-track"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></button>
           </div>
-      <div class="product-track" id="product-track" role="tabpanel" aria-label="Productos" tabindex="0">
+      <div class="product-track" id="product-track" role="region" aria-label="Productos" tabindex="0">
         <article class="pc-slide pc-ultra" data-family="ultra" aria-roledescription="slide" data-producto="Ultra 50+ · Spray 150 ml" data-familia="Ultra 50+">
           <a class="pc-media" href="#sku-spray" tabindex="-1"><img src="images/linea-spray-150ml.webp" width="720" height="900" alt="Fotosol Ultra 50+ spray continuo 150 ml" loading="lazy" draggable="false"></a>
           <div class="pc-body">

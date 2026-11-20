@@ -75,7 +75,7 @@
     document.querySelectorAll('.family-tab').forEach(tab => tab.addEventListener('click', () => {
       const fam = tab.dataset.family;
       document.querySelectorAll('.family-tab').forEach(t => {
-        const on = t === tab; t.classList.toggle('is-active', on); t.setAttribute('aria-selected', String(on));
+        const on = t === tab; t.classList.toggle('is-active', on); t.setAttribute('aria-pressed', String(on));
       });
       slides.forEach(sl => { sl.hidden = !(fam === 'all' || sl.dataset.family === fam); });
       track.scrollTo({ left: 0, behavior: 'auto' });
@@ -178,7 +178,7 @@
     if ('IntersectionObserver' in window) {
       const tio = new IntersectionObserver(entries => entries.forEach(e => {
         if (e.isIntersecting) { typeWord(e.target); tio.unobserve(e.target); }
-      }), { threshold: 1 });
+      }), { threshold: 0.25 });
       typeEls.forEach(el => tio.observe(el));
     } else typeEls.forEach(typeWord);
   }
