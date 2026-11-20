@@ -674,3 +674,11 @@ h3,.ritual-step h3,.sku h3,.pc-body h3,.closing-family strong,.ultra-spec dt{fon
   outline:3px solid #04244b;
   outline-offset:4px;
 }
+
+/* QA WCAG 2.2 AA: contraste de textos sin alterar estructura ni contenido. */
+.hero-overline,.step-num,.plano-fps{color:#a34800}
+.btn-orange,.badge-vol{background:#a34800;color:#fff}
+.btn-orange:hover{background:#873b00;color:#fff}
+.badge-vol small{color:#fff}
+.plano-variant p{color:#655d52}
+.plano-kicker{color:#78571d}
